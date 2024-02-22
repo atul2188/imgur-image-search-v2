@@ -7,7 +7,7 @@ import com.example.imgurimagesearchv2.data.remote.ApiService
 import com.example.imgurimagesearchv2.presentation.repository.ImgurRepository
 import javax.inject.Inject
 
-class ImgurRepository @Inject constructor(
+class ImgurRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : ImgurRepository {
     override fun getImageSearchResults(q: String) =

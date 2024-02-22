@@ -1,6 +1,8 @@
 package com.example.imgurimagesearchv2.di
 
 import com.example.imgurimagesearchv2.data.remote.ApiService
+import com.example.imgurimagesearchv2.data.repository.ImgurRepositoryImpl
+import com.example.imgurimagesearchv2.presentation.repository.ImgurRepository
 import com.example.imgurimagesearchv2.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -21,6 +23,11 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
+    }
+
+    @Provides
+    fun provideImgurRepository(apiService: ApiService): ImgurRepository{
+        return ImgurRepositoryImpl(apiService)
     }
 
 }

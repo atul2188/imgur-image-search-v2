@@ -10,6 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.imgurimagesearchv2.presentation.ImgurViewModel
+import com.example.imgurimagesearchv2.presentation.screens.HomeScreen
 import com.example.imgurimagesearchv2.ui.theme.ImgurImageSearchV2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,30 +23,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ImgurImageSearchV2Theme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                val viewModel = hiltViewModel<ImgurViewModel>()
+                val images = viewModel.searchedImages.collectAsLazyPagingItems()
+                HomeScreen(
+                    dataList = images,
+                    event = viewModel::onEvent
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ImgurImageSearchV2Theme {
-        Greeting("Android")
     }
 }
