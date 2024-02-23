@@ -45,7 +45,7 @@ fun ImageGridItem(image: Image) {
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data("")
+                    .data(image.link)
                     .build(),
                 contentDescription = "This is image from Imgur",
                 contentScale = ContentScale.Crop,
@@ -55,16 +55,20 @@ fun ImageGridItem(image: Image) {
                     .fillMaxWidth(1f)
             )
             Spacer(modifier = Modifier.width(80.dp))
-            Text(
-                text = "Hello",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary,
-            )
-            Text(
-                text = "World",
-                color = MaterialTheme.colorScheme.primary,
-                style = MaterialTheme.typography.titleSmall,
-            )
+            image.title?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
+            image.description?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleSmall,
+                )
+            }
         }
     }
 

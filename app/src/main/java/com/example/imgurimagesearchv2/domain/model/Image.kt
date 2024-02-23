@@ -11,7 +11,7 @@ data class Image(
     @SerializedName("datetime")
     val datetime: Int,
     @SerializedName("description")
-    val description: Any,
+    val description: String?,
     @SerializedName("height")
     val height: Int,
     @SerializedName("id")
@@ -21,7 +21,7 @@ data class Image(
     @SerializedName("size")
     val size: Int,
     @SerializedName("title")
-    val title: Any,
+    val title: String?,
     @SerializedName("type")
     val type: String,
     @SerializedName("views")

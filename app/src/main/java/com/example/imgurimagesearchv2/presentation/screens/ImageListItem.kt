@@ -55,28 +55,33 @@ fun ImageListItem(
                     .data(image.link)
                     .build(),
                 contentDescription = "This is image from Imgur",
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Inside,
                 modifier = Modifier
                     .background(shimmerBrush(targetValue = 1300f, showShimmer = showShimmer.value))
                     .height(150.dp)
-                    .weight(1f)
+                    .width(150.dp)
+                    .weight(2f)
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column(
-                modifier = Modifier.weight(2f)
+                modifier = Modifier.weight(1f)
                     .fillMaxHeight(),
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "Hello",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-                Text(
-                    text = "World",
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.titleSmall,
-                )
+                image.title?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                image.description?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.titleSmall,
+                    )
+                }
             }
 
         }

@@ -43,7 +43,8 @@ import com.example.imgurimagesearchv2.presentation.SearchEvent
 @Composable
 fun HomeScreen(
     dataList: LazyPagingItems<Data>,
-    event: (SearchEvent) -> Unit
+    event: (SearchEvent) -> Unit,
+    modifier: Modifier
 ) {
 
     val query: MutableState<String> = remember {
@@ -56,7 +57,7 @@ fun HomeScreen(
 
     Surface {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .padding(
                     top = MediumPadding1,
                     start = MediumPadding1,
@@ -98,7 +99,7 @@ fun HomeScreen(
                 Text(text = "Grid", fontSize = 20.sp)
             }
             Box(modifier = Modifier.fillMaxSize()){
-                if (dataList.loadState.refresh is LoadState.Loading){
+                if (dataList.loadState.refresh is LoadState.Loading && query.value.isNotEmpty()){
                     CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center)
                     )
@@ -120,8 +121,7 @@ fun HomeScreen(
 @Composable
 fun ImageListDisplay(data: LazyPagingItems<Data>){
     LazyColumn(modifier = Modifier
-        .fillMaxSize()
-        .background(color = MaterialTheme.colorScheme.secondary),
+        .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         contentPadding = PaddingValues(16.dp)
@@ -140,8 +140,7 @@ fun ImageListDisplay(data: LazyPagingItems<Data>){
 fun ImageGridDisplay(data: LazyPagingItems<Data>){
     LazyVerticalGrid(columns = GridCells.Fixed(2),
         modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.primary)) {
+            .fillMaxSize()) {
         items(
             data.itemCount,
             key = data.itemKey{ it -> it.id}){ index ->
