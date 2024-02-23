@@ -9,7 +9,7 @@ data class Image(
     @SerializedName("bandwidth")
     val bandwidth: Long,
     @SerializedName("datetime")
-    val datetime: Int,
+    val datetime: Int?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("height")

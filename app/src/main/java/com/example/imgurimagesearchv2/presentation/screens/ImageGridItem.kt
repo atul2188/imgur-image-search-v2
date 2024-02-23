@@ -1,5 +1,7 @@
 package com.example.imgurimagesearchv2.presentation.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,7 +27,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.imgurimagesearchv2.domain.model.Image
+import com.example.imgurimagesearchv2.util.Constants
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ImageGridItem(image: Image) {
     val showShimmer = remember {
@@ -55,18 +59,19 @@ fun ImageGridItem(image: Image) {
                     .fillMaxWidth(1f)
             )
             Spacer(modifier = Modifier.width(80.dp))
-            image.title?.let {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-            }
+
             image.description?.let {
                 Text(
                     text = it,
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.titleSmall,
+                )
+            }
+            image.datetime?.let {
+                Text(
+                    text = Constants.epochToLocalDateTime(it.toLong()),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
         }

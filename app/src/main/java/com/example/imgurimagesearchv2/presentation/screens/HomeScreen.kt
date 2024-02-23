@@ -1,5 +1,7 @@
 package com.example.imgurimagesearchv2.presentation.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -40,6 +42,7 @@ import com.example.imgurimagesearchv2.domain.model.Data
 import com.example.imgurimagesearchv2.presentation.Dimens.MediumPadding1
 import com.example.imgurimagesearchv2.presentation.SearchEvent
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HomeScreen(
     dataList: LazyPagingItems<Data>,
@@ -118,6 +121,7 @@ fun HomeScreen(
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ImageListDisplay(data: LazyPagingItems<Data>){
     LazyColumn(modifier = Modifier
@@ -136,6 +140,7 @@ fun ImageListDisplay(data: LazyPagingItems<Data>){
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ImageGridDisplay(data: LazyPagingItems<Data>){
     LazyVerticalGrid(columns = GridCells.Fixed(2),
